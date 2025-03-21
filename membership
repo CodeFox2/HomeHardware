@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Personal Profile</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+
+<div class="body1">
+    <!-- Header -->
+    <div class="header">
+        <h1>Home Hardware Delivery Service</h1>
+        <p>Your One Stop Shop For Everything Home Hardware!</p>
+        <div class="topnav">
+        <a href="#">Home</a>
+        <a href="#">Shop</a>
+        <a href="#">Sign In</a>
+        <a href="#">Profile</a>
+        <a href="#">🛒</a>
+      </ul>
+    </div>
+  </header>
+  <br><br><br><br>
+</body1>
+
+
+
+<div class="center">
+    <br><br>
+<form>
+    <h3>Customer ID:&ensp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</h3>
+</form>
+<br><br>
+<form>
+    <h3>Points:&ensp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</h3>
+</form>
+
+<br><br>
+    <form>
+    <h3><label for="newsletter">Newsletter:&ensp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</label></h3>
+    <input type="checkbox" id="myCheck" value="Subscribed">
+    <button onclick="newsletter()">Submit</button>
+    <p id="text"></p>
+</form>
+    <br><br>
+
+    <form>
+    <h3><label for="perks">Perks:&emsp;&emsp;</label></h3>
+    <select name="perks" id="perks" Perks>
+        <option value="">Choose One</option>
+        <option value="Free Shipping">Free Shipping</option>
+        <option value="Pre-Order">Pre-Order</option>
+        <option value="Gift Card">Gift Card</option>
+      </select>
+      <input type="submit" value="Convert"><br><br>
+    </form>
+
+</div>
+
+  <section class="product-grid">
+    <!-- Products will be dynamically loaded here -->
+  </section>
+
+  <br><br><br><br>
+  <footer>
+    <p>&copy; 2025 Home Hardware. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</html>
+
+
+<script>
+  
+    
+
+
+  function newsletter(){
+    var checkBox = document.getElementById("myCheck");
+  var text = document.getElementById("text");
+let result = 'null';
+    if(checkBox.checked == true){
+      result = 'Subscribed';
+    }
+
+    else{
+      result = 'Not Subscribed';
+    }
+    document.getElementById('text').innerHTML = result;
+  }
+  
+</script>

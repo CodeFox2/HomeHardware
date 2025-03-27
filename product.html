@@ -1,55 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Product Catalog - Home Hardware</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hardware Express - Online Hardware Store with Delivery</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <nav>
-      <div class="logo">Home Hardware</div>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Shop</a></li>
-        <li><a href="#">Sign In</a></li>
-        <li><a href="#">Cart</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <section class="filters">
-    <h2>Filters</h2>
-    <div class="filter-options">
-      <select id="category">
-        <option value="all">All Categories</option>
-        <option value="tools">Tools</option>
-        <option value="plumbing">Plumbing</option>
-        <option value="electrical">Electrical</option>
-      </select>
-      <input type="range" id="price-range" min="0" max="1000" value="500">
-      <p>Price: $<span id="price-value">500</span></p>
-      <select id="sort-by">
-        <option value="default">Sort By</option>
-        <option value="price-low-to-high">Price: Low to High</option>
-        <option value="price-high-to-low">Price: High to Low</option>
-        <option value="popularity">Popularity</option>
-        <option value="rating">Rating</option>
-      </select>
+    <header>
+        <div class="container">
+            <h1>Hardware Express</h1>
+            <p>Your tools and materials delivered in 2 hours or less!</p>
+        </div>
+    </header>
+    
+    <div class="cart-icon" id="cartIcon">
+        🛒 <span class="cart-count" id="cartCount">0</span>
     </div>
-  </section>
-
-  <section class="product-grid">
-    <!-- Products will be dynamically loaded here -->
-  </section>
-
-  <button id="load-more">Load More</button>
-
-  <footer>
-    <p>&copy; 2025 Home Hardware. All rights reserved.</p>
-  </footer>
-
-  <script src="script.js"></script>
+    
+    <div class="container">
+        <h2>Our Products</h2>
+        <div class="products-grid" id="productsGrid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1581093450025-7d35f4774b33?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Power Drill" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Cordless Power Drill Set</h3>
+                    <p class="product-description">20V MAX lithium-ion cordless drill/driver with 2 batteries, charger, and carrying case.</p>
+                    <span class="delivery-badge">2-Hour Delivery Available</span>
+                    <div class="product-price">$89.99</div>
+                    <button class="add-to-cart" data-id="1" data-name="Cordless Power Drill Set" data-price="89.99" data-image="https://images.unsplash.com/photo-1581093450025-7d35f4774b33?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80">Add to Cart</button>
+                </div>
+            </div>
+            
+            <!-- Product 2 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Paint Supplies" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Premium Paint Kit</h3>
+                    <p class="product-description">Includes 1 gallon of premium paint, roller, tray, brushes, and drop cloth.</p>
+                    <span class="delivery-badge">2-Hour Delivery Available</span>
+                    <div class="product-price">$49.99</div>
+                    <button class="add-to-cart" data-id="2" data-name="Premium Paint Kit" data-price="49.99" data-image="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80">Add to Cart</button>
+                </div>
+            </div>
+            
+            <!-- Product 3 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1560713781-d50d48f8e664?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Tool Set" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">65-Piece Home Tool Set</h3>
+                    <p class="product-description">Complete set with screwdrivers, wrenches, pliers, hammer, tape measure, and more.</p>
+                    <span class="delivery-badge">2-Hour Delivery Available</span>
+                    <div class="product-price">$129.99</div>
+                    <button class="add-to-cart" data-id="3" data-name="65-Piece Home Tool Set" data-price="129.99" data-image="https://images.unsplash.com/photo-1560713781-d50d48f8e664?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80">Add to Cart</button>
+                </div>
+            </div>
+            
+            <!-- Product 4 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Lumber" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Pressure-Treated Lumber (8ft)</h3>
+                    <p class="product-description">2x4 pressure-treated pine lumber for outdoor projects. Each piece is 8 feet long.</p>
+                    <span class="delivery-badge">2-Hour Delivery Available</span>
+                    <div class="product-price">$6.99</div>
+                    <button class="add-to-cart" data-id="4" data-name="Pressure-Treated Lumber (8ft)" data-price="6.99" data-image="https://images.unsplash.com/photo-1600585152220-90363fe7e115?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80">Add to Cart</button>
+                </div>
+            </div>
+            
+            <!-- Product 5 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1605152276897-4f618f831968?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Safety Gear" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Safety Gear Bundle</h3>
+                    <p class="product-description">Includes safety glasses, work gloves, ear protection, and dust masks.</p>
+                    <span class="delivery-badge">2-Hour Delivery Available</span>
+                    <div class="product-price">$24.99</div>
+                    <button class="add-to-cart" data-id="5" data-name="Safety Gear Bundle" data-price="24.99" data-image="https://images.unsplash.com/photo-1605152276897-4f618f831968?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80">Add to Cart</button>
+                </div>
+            </div>
+            
+            <!-- Product 6 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1592078615290-033ee584e267?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Hardware Kit" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Hardware Assortment Kit</h3>
+                    <p class="product-description">300-piece assortment of nails, screws, bolts, washers, and anchors.</p>
+                    <span class="delivery-badge">2-Hour Delivery Available</span>
+                    <div class="product-price">$19.99</div>
+                    <button class="add-to-cart" data-id="6" data-name="Hardware Assortment Kit" data-price="19.99" data-image="https://images.unsplash.com/photo-1592078615290-033ee584e267?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Shopping Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="close-cart" id="closeCart">×</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p id="emptyCartMessage">Your cart is empty</p>
+        </div>
+        <div class="cart-total">
+            Total: $<span id="cartTotal">0.00</span>
+        </div>
+        <button class="checkout-btn">Proceed to Checkout</button>
+    </div>
+    
+    <script src="script.js"></script>
 </body>
 </html>

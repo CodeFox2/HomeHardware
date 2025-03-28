@@ -299,29 +299,28 @@ h1, h2, h3 {
 }
 
 .center {
+    background: #ffff8d;
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 25%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 85%;
     height: auto;
 }
 
-body1 {
+.body1 {
     text-align: left;
     background-color: lightgoldenrodyellow; 
 }
 
-center {
-    background: lightgoldenrodyellow;
-    margin: 40%;
-}
-
 form {
+    text-align: center;
     margin: auto;
-    width:fit-content;
+    width: 40%;
     padding: 10px;
     padding-left: 30px;
-    padding-right: 80px;
+    padding-right: 30px;
     color: white;
     border-radius: 15px;
     background-color: #ff8800;

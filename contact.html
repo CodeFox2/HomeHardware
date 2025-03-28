@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
+    <title>Home Hardware Delivery Service</title>
+</head>
+<body>
+    <h1>Home Hardware Delivery Service</h1>
+    <p>Your One Stop Shop For Everything Home Hardware!</p>
+    <h2>Contact Us</h2>
+    <div class="topnav">
+        <nav>
+        <a href="homepage.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="membership.html">Membership</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="checkout.html">Checkout</a>  
+        </nav>
+    </div>
+
+    <div class="center">
+        <form id="inquiry">
+            <h3>Send an Inquiry</h3>
+            <label for="question">Your Question...</label><br>
+            <textarea id="question" name="question" placeholder="Ask us something." rows="8" cols="47"></textarea><br>
+            
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" size="50"><br>
+
+            <label for="mail">E-mail:</label><br>
+            <input type="email" id="mail" name="mail" size="50"><br>
+
+            <input type="submit" value="Send">
+        </form><br>
+        <form id="faq">
+            <h3>Frequently Asked Questions</h3>
+            <select name="frequentyasked" id="frequentyasked" style="width: 500px;">
+                <option value="">Choose One</option>
+                <option value="q1">When do you regularly restock?</option>
+                <option value="q2">What times are you open?</option>
+                <option value="q3">How do you spell Hoborg?</option>
+            </select><br>
+            <input type="submit" value="Select">
+            <p id="q"></p> <!-- Answer to selected question goes here -->
+        </form><br>
+        <form id="findus">
+            <h3>Find Us Nearby</h3>
+            <label for="location">Your Location Here:</label><br>
+            <input type="text" id="location" name="location" size="50"><br>
+            <input type="submit" value="Find Stores">
+        </form>
+    </div>
+
+    <footer>
+    <div class="footer">
+        <p>&copy; 2025. All Rights Reserved.</p>
+    </div>
+    </footer>
+</body>
+</html>

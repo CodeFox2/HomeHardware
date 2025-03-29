@@ -8,11 +8,16 @@ body {
     background-color: #f5f5f5;
 }
 
-h1, h2, h3 {
+h1, h2 {
     text-align: center;
     font-weight: bolder;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
+h3 {
+    text-align: center;
+    color: rgb(0, 102, 255);
+  }
 
 .center {
     display: block;
@@ -383,29 +388,20 @@ p {
     }
 }
 /* Checkout Page Styles */
-.checkout-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    margin-top: 2rem;
-}
+.checkout {
+    padding: 20px;
+    margin: auto;
+    background-color: rgb(255, 255, 204);
+    width: 80%;
+    height: 100%;
+  }
 
-.checkout-form {
-    flex: 2;
-    min-width: 300px;
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.order-summary {
-    flex: 1;
-    min-width: 300px;
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  .payment input {
+    width: 200px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 .form-group {

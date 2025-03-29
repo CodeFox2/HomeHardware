@@ -3,23 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hardware Express - Online Hardware Store with Delivery</title>
+    <title>Products - Hardware Express</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>Home Hardware Delivery Service</h1>
     <p>Your One Stop Shop For Everything Home Hardware!</p>
-    <h2>Homepage</h2>
     <div class="topnav">
         <nav>
-        <a href="homepage.html">Home</a>
-        <a href="products.html">Products</a>
-        <a href="membership.html">Membership</a>
-        <a href="contact.html">Contact Us</a>
-        <a href="checkout.html">Checkout</a>  
+            <a href="homepage.html">Home</a>
+            <a class="active" href="products.html">Products</a>
+            <a href="membership.html">Membership</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="checkout.html">Checkout</a>  
+            <a href="signup.html">Sign Up</a>  
+
         </nav>
     </div>
-<body>
+    
     <header>
         <div class="container">
             <h1>Hardware Express</h1>
@@ -33,9 +34,45 @@
     
     <div class="container">
         <h2>Our Products</h2>
+        
+        <!-- Filters Section -->
+        <div class="filters">
+            <div class="filter-options">
+                <div>
+                    <p>Category:</p>
+                    <select id="categoryFilter">
+                        <option value="all">All Categories</option>
+                        <option value="tools">Tools</option>
+                        <option value="materials">Building Materials</option>
+                        <option value="safety">Safety Equipment</option>
+                        <option value="hardware">Hardware</option>
+                    </select>
+                </div>
+                <div>
+                    <p>Price Range:</p>
+                    <select id="priceFilter">
+                        <option value="all">All Prices</option>
+                        <option value="0-50">$0 - $50</option>
+                        <option value="50-100">$50 - $100</option>
+                        <option value="100-150">$100 - $150</option>
+                        <option value="150+">$150+</option>
+                    </select>
+                </div>
+                <div>
+                    <p>Sort By:</p>
+                    <select id="sortBy">
+                        <option value="default">Default</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="name">Name (A-Z)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
         <div class="products-grid" id="productsGrid">
             <!-- Product 1 -->
-            <div class="product-card">
+            <div class="product-card" data-category="tools" data-price="89.99">
                 <img src="https://imgs.search.brave.com/CfM7KWmojsWXQK0oAwp5_HXihA_iYZuE2UXNWYvi5oc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pNS53/YWxtYXJ0aW1hZ2Vz/LmNvbS9hc3IvY2Ew/OTljODQtNTRiZC00/YWE5LTljMzYtZDY5/YzlmNTJlMDRiLjcz/MTMyNWZlNWY3YTlk/MWRjY2VjYTE3MWQz/YWM2OWQ2LmpwZWc_/b2RuSGVpZ2h0PTU4/MCZvZG5XaWR0aD01/ODAmb2RuQmc9RkZG/RkZG" alt="Power Drill" class="product-image">
                 <div class="product-info">
                     <h3 class="product-title">Cordless Power Drill Set</h3>
@@ -47,7 +84,7 @@
             </div>
             
             <!-- Product 2 -->
-            <div class="product-card">
+            <div class="product-card" data-category="materials" data-price="49.99">
                 <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Paint Supplies" class="product-image">
                 <div class="product-info">
                     <h3 class="product-title">Premium Paint Kit</h3>
@@ -59,7 +96,7 @@
             </div>
             
             <!-- Product 3 -->
-            <div class="product-card">
+            <div class="product-card" data-category="tools" data-price="129.99">
                 <img src="https://m.media-amazon.com/images/I/61+G3urcMgL._AC_SL1057_.jpg" alt="Tool Set" class="product-image">
                 <div class="product-info">
                     <h3 class="product-title">65-Piece Home Tool Set</h3>
@@ -71,7 +108,7 @@
             </div>
             
             <!-- Product 4 -->
-            <div class="product-card">
+            <div class="product-card" data-category="materials" data-price="6.99">
                 <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Lumber" class="product-image">
                 <div class="product-info">
                     <h3 class="product-title">Pressure-Treated Lumber (8ft)</h3>
@@ -83,7 +120,7 @@
             </div>
             
             <!-- Product 5 -->
-            <div class="product-card">
+            <div class="product-card" data-category="safety" data-price="24.99">
                 <img src="https://images.unsplash.com/photo-1605152276897-4f618f831968?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Safety Gear" class="product-image">
                 <div class="product-info">
                     <h3 class="product-title">Safety Gear Bundle</h3>
@@ -95,7 +132,7 @@
             </div>
             
             <!-- Product 6 -->
-            <div class="product-card">
+            <div class="product-card" data-category="hardware" data-price="19.99">
                 <img src="https://images.unsplash.com/photo-1592078615290-033ee584e267?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Hardware Kit" class="product-image">
                 <div class="product-info">
                     <h3 class="product-title">Hardware Assortment Kit</h3>
@@ -106,6 +143,8 @@
                 </div>
             </div>
         </div>
+        
+        <button id="load-more">Load More Products</button>
     </div>
     
     <!-- Shopping Cart Modal -->
@@ -120,8 +159,13 @@
         <div class="cart-total">
             Total: $<span id="cartTotal">0.00</span>
         </div>
-        <button class="checkout-btn">Proceed to Checkout</button>
+        <button class="checkout-btn" id="proceedToCheckout">Proceed to Checkout</button>
     </div>
+    
+    <footer>
+        <p>&copy; 2023 Hardware Express. All rights reserved.</p>
+        <p>Fast hardware delivery to your doorstep within 2 hours</p>
+    </footer>
     
     <script src="script.js"></script>
 </body>

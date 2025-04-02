@@ -441,6 +441,11 @@ p {
 
 .payment-methods {
     margin: 2rem 0;
+    background-color: #ffffff;
+    min-width: 200px; 
+    border-radius: 4px; 
+    padding: 1rem;
+    font-family: Arial, sans-serif;
 }
 
 .payment-option {
@@ -540,3 +545,5 @@ p {
         gap: 0;
     }
 }
+
+

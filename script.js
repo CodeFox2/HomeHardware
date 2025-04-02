@@ -1,3 +1,6 @@
+// Connect to backend
+const bkEnd = "http://localhost:3000";
+
 // Cart functionality
 let cart = [];
 

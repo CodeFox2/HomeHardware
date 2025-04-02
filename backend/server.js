@@ -11,10 +11,11 @@ const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'atthelastsecond',
-    database: 'crud_test'
+    database: 'hardware'
 });
+// "atthelastsecond" can be replaced with whatever password your database uses
 
-//ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'atthelastsecond';
+//ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '[password]';
 db.connect((err) => {
     if (err) throw err;
     console.log('Connected to MySQL Database');

@@ -27,3 +27,6 @@ ADD CONSTRAINT `account_id`
 
 // Also, don't forget:
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456';
+
+INSERT INTO accounts (name, email, password)
+VALUES ('Shirley Perr', 'email@gmail.com', 'iLovePowerTools');

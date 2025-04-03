@@ -24,8 +24,8 @@ ADD CONSTRAINT `account_id`
   REFERENCES `hardware`.`accounts` (`account_id`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
+ALTER TABLE accounts AUTO_INCREMENT=1001;
 
-// Also, don't forget:
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'atthelastsecond';
 
 INSERT INTO accounts (name, address, password, points)

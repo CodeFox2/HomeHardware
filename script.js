@@ -33,7 +33,7 @@ closeCart.addEventListener('click', () => {
 
 // Add to cart functionality
 addToCartButtons.forEach(button => {
-    button.addEventListener('click', () => {
+    button.addEventListener('click', async () => {
         const id = button.getAttribute('data-id');
         const name = button.getAttribute('data-name');
         const price = parseFloat(button.getAttribute('data-price'));
@@ -41,9 +41,15 @@ addToCartButtons.forEach(button => {
         
         // Check if item already in cart
         const existingItem = cart.find(item => item.id === id);
-        
+        var quant;
+
+        const addIt = quant < 2 ? `${BASE_URL}/add` : `${BASE_URL}/update/${id}`;
+        const method = quant < 2 ? 'POST' : 'PUT';
+        console.log("!");
+
         if (existingItem) {
             existingItem.quantity += 1;
+            quant = existingItem.quantity;
         } else {
             cart.push({
                 id,
@@ -52,8 +58,20 @@ addToCartButtons.forEach(button => {
                 image,
                 quantity: 1
             });
+            quant = 1;
         }
-        
+        const toTable = {id, name, price, quant};
+        console.log(JSON.stringify(toTable));
+        const response = await fetch(addIt, {
+            method: 'POST',
+            headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+            body: JSON.stringify(toTable),
+        });
+        if (response.ok) {
+            console.log("Yes");
+        } else {
+            console.log("No");
+        }
         updateCart();
         cartModal.style.display = 'block';
     });

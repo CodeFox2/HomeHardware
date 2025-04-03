@@ -6,49 +6,55 @@
     <title>Home Hardware Delivery Service</title>
 </head>
 <body>
-    <h1>Home Hardware Delivery Service</h1>
+    <h1>Hardware Express</h1>
     <p>Your One Stop Shop For Everything Home Hardware!</p>
     <div class="topnav">
         <nav>
             <a href="homepage.html">Home</a>
             <a href="products.html">Products</a>
-            <a href="signup.html">Sign Up</a>
             <a href="membership.html">Membership</a>
             <a class="active" href="contact.html">Contact Us</a>
             <a href="checkout.html">Checkout</a>  
+            <a href="signup.html">Sign Up</a>
         </nav>
     </div>
 
     <div class="center">
         <form id="inquiry">
             <h3>Send an Inquiry</h3>
-            <label for="question">Your Question...</label><br>
-            <textarea id="question" name="question" placeholder="Ask us something." rows="8" cols="47"></textarea><br>
-            
-            <label for="name">Name:</label><br>
-            <input type="text" id="name" name="name" size="35"><br>
-
-            <label for="mail">E-mail:</label><br>
-            <input type="email" id="mail" name="mail" size="35"><br>
-
-            <input type="submit" value="Send">
+            <div class="form-group">
+                <label for="question">Your Question...</label>
+                <textarea id="question" name="question" placeholder="Ask us something." rows="8" cols="47" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" size="50" required><br>
+            </div>
+            <div class="form-group">
+                <label for="mail">E-mail:</label>
+                <input type="email" id="mail" name="mail" size="50" required><br>
+            </div>
+            <input type="submit" value="Send" onclick="windows.alert('Sent!')">
         </form><br>
         <form id="faq">
             <h3>Frequently Asked Questions</h3>
-            <select name="frequentyasked" id="frequentyasked" style="width: 500px;">
+            <select name="frequentyasked" id="frequentyasked" style="width: 100%;">
                 <option value="">Choose One</option>
                 <option value="q1">When do you regularly restock?</option>
                 <option value="q2">What times are you open?</option>
-                <option value="q3">How do you spell Hoborg?</option>
+                <option value="q3">Can orders be canceled when made?</option>
+                <option value="q3">Do you offer free shipping?</option>
             </select><br>
             <input type="submit" value="Select">
             <p id="q"></p> <!-- Answer to selected question goes here -->
         </form><br>
         <form id="findus">
             <h3>Find Us Nearby</h3>
-            <label for="location">Your Location Here:</label><br>
-            <input type="text" id="location" name="location" size="35"><br>
-            <input type="submit" value="Find Stores">
+            <div class="form-group">
+                <label>Our Current Locations:</label>
+                <p>123 Place Drive, 123 456</p>
+                <p>67 Thomas Lane, 8GH 99O</p>
+            </div>
         </form>
     </div>
 

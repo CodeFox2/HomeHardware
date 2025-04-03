@@ -221,3 +221,40 @@ function loadCart() {
 }
 
 loadCart();
+
+//-----------------------------------------------------------------------------------------------
+
+function faqAnswers() {
+    let question = document.getElementById("frequentyasked").value;
+    if (question == q1) {
+        document.getElementById("result").innerHTML = `
+            <p>Here at Hardware Express, we sell a wide variety of home hardware tools,
+            from DIY materials like wood, paint, nails and such, to tools like power drills
+            and screwdrivers, to more practical things like safety gear.</p>
+        `;
+    } else if (question == q2) {
+        document.getElementById("result").innerHTML = `
+            <p>We regularly restock every Sunday.</p>
+        `;
+    } else if (question == q3) {
+        document.getElementById("result").innerHTML = `
+            <p>Our website is always open, but deliveries may be delayed to the following
+            day depending on the time of day or other outside factors.</p>
+        `;
+    } else if (question == q4) {
+        document.getElementById("result").innerHTML = `
+            <p>No. But you can call us to get a refund provided it's been a week since your
+            delivery and the warranty/warranties of your purchase(s) haven't been voided.</p>
+        `;
+    } else if (question == q5) {
+        document.getElementById("result").innerHTML = `
+            <p>Only to customers who've earned a certain number of points from purchases.</p>
+        `;
+    } else if (question == q6) {
+        document.getElementById("result").innerHTML = `
+            <p>Not really, no. Sorry.</p>
+        `;
+    } else {
+        console.log("Nothing.");
+    }
+}

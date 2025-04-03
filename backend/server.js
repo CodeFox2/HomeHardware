@@ -6,6 +6,9 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
+const PORT = 3000;
+app.listen(PORT, () => console.log(`Server running on http://localhost: ${PORT}`));
+
 //Connect to MySQL
 const db = mysql.createConnection({
     host: 'localhost',
@@ -13,29 +16,28 @@ const db = mysql.createConnection({
     password: 'atthelastsecond',
     database: 'hardware'
 });
-// "atthelastsecond" can be replaced with whatever password your database uses
 
-//ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '[password]';
+//ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'atthelastsecond';
 db.connect((err) => {
     if (err) throw err;
     console.log('Connected to MySQL Database');
 });
 app.get("/", (req, res) => {
-    res.json("hello");
+    res.json("Welcome.");
 });
 
 //Post Method: Insert Data
 app.post('/add', (req, res) => {
-    const {name, job, experience, salary} = req.body;
-    const query = 'INSERT INTO employees (name, job, experience, salary) VALUES (?, ?, ?, ?)';
-    db.query(query, [name, job, experience, salary], (err) => {
+    const {item_name, item_price, item_quantity} = req.body;
+    const query = 'INSERT INTO cart (item_name, item_price, item_quantity) VALUES (?, ?, ?)';
+    db.query(query, [item_name, item_price, item_quantity], (err) => {
         if (err) return res.status(500).send(err);
-        res.send('Employee added successfully');
+        res.send('Item added successfully');
     });
 });
 //Get Method: Read Data
-app.get('/employees', (req, res) => {
-    const query = 'SELECT * FROM employees';
+app.get('/cart', (req, res) => {
+    const query = 'SELECT * FROM cart';
     db.query(query, (err, results) => {
         if (err) return res.status(500).send(err);
         res.json(results);
@@ -44,22 +46,19 @@ app.get('/employees', (req, res) => {
 //Put Method: Update Data
 app.put('/update/:id', (req, res) => {
     const { id } = req.params;
-    const { name, job, experience, salary } = req.body;
-    const query = 'UPDATE employees SET name = ?, job = ?, experience = ?, salary = ? WHERE id = ?';
-    db.query(query, [name, job, experience, salary, id], (err) => {
+    const { item_quantity } = req.body;
+    const query = 'UPDATE cart SET item_quantity = ? WHERE id = ?';
+    db.query(query, [item_quantity, id], (err) => {
         if (err) return res.status(500).send(err);
-        res.send('Employee updated successfully');
+        res.send('Item count updated successfully');
     });
 });
 //Delete Method: Delete Data
 app.delete('/delete/:id', (req, res) => {
     const { id } = req.params;
-    const query = 'DELETE FROM employees WHERE id = ?';
+    const query = 'DELETE FROM cart WHERE id = ?';
     db.query(query, [id], (err) => {
         if (err) return res.status(500).send(err);
-        res.send('Employee deleted successfully');
+        res.send('Item deleted successfully');
     });
 });
-
-const PORT = 3000;
-app.listen(PORT, () => console.log(`Server running on http://localhost: ${PORT}`));

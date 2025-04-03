@@ -26,7 +26,7 @@ ADD CONSTRAINT `account_id`
   ON UPDATE NO ACTION;
 
 // Also, don't forget:
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456';
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'atthelastsecond';
 
 INSERT INTO accounts (name, address, password, points)
 VALUES ('Shirley Perr', 'email@gmail.com', 'iLovePowerTools', 25);

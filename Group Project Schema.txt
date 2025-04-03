@@ -24,3 +24,6 @@ ADD CONSTRAINT `account_id`
   REFERENCES `hardware`.`accounts` (`account_id`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
+
+// Also, don't forget:
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456';

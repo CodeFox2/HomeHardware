@@ -259,17 +259,27 @@ function faqAnswers() {
     }
 }
 
+function newsletter() {
+    var checkBox = document.getElementById("myCheck");
+    var text = document.getElementById("text");
+    let result = 'null';
+    if(checkBox.checked == true){
+        result = 'Subscribed!';
+    } else {
+        result = 'Not Subscribed...';
+    }
+        text.innerHTML = result;
+}
 //-----------------------------------------------------------------------------------------------
 
-// Backend base URL
-const BASE_URL = "http://localhost:3000";
+// Backend Stuff
 
 async function newAcc() {
     const acc = retrieveData();
     console.log(JSON.stringify(acc))
 
     try {
-        const response = await fetch(`http://localhost:3000/add`, {
+        const response = await fetch(`http://localhost:3000/new`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -279,11 +289,15 @@ async function newAcc() {
             body: JSON.stringify(acc),
         });
 
-        if (response.ok) {
-            document.getElementById("signupForm").reset(); // Reset the form
-        } else {
+        if (!response.ok) {
             window.alert("Error registering account!");
         }
+        var form = document.getElementById("signupForm");
+        form.addEventListener("submit", redirectR = function(e) {
+            e.preventDefault();
+            window.alert("Account made.\nWelcome!");
+            window.location.assign("login.html");
+        });
     } catch (error) {
         console.error('Error:', error);
     }
@@ -301,29 +315,27 @@ function retrieveData() {
 async function checkLogin() {
     const u = document.getElementById("email").value;
     const p = document.getElementById("password").value;
-    if (u !== "" || p != "") {
-        const input = {u, p};
-        console.log(input);
+    if (u != "" || p != "") {
         try {
-            const response = await fetch(`http://localhost:3000/login`, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Accept-Charset': 'utf-8',
-                    'Cache-Control': 'no-cache' },
-                body: JSON.stringify(input),
-            });
-            if (response.ok) {
-                if (response) {
-                    window.alert("Welcome!");
-                    window.location.assign("membership.html");
-                }
+            const BASE = `http://localhost:3000`;
+            const response = await fetch(`${BASE}/login/${u}/${p}`);
+            console.log(response);
+            const match = await response.json();
+            if (!response.ok) {
+                window.alert("Incorrect username and/or password!");
             } else {
-                window.alert("Error logging in!");
+                const input = {u, p};
+                console.log(input);
+                localStorage.setItem("accLogin", JSON.stringify(input));
             }
+            var form = document.getElementById("loginForm");
+                form.addEventListener("submit", redirectL = function(e) {
+                    e.preventDefault();
+                });
+            window.alert("Logged in.\nWelcome!");
+            window.location.assign("membership.html");
         } catch (error) {
-            console.error('Error fetching data:', error);
+            window.alert("Incorrect username and/or password!");
         }
     } else {
         window.alert("Error logging in!");
@@ -335,15 +347,29 @@ async function getID() {
         const IDDisplay = document.getElementById("custID");
         const PDisplay = document.getElementById("pointTotal");
 
-        const response = await fetch(`http://localhost:3000/customer`);
+        const loginfo = JSON.parse(localStorage.getItem("accLogin"));
+        console.log(loginfo);
+
+        const BASE = `http://localhost:3000`;
+        const response = await fetch(`${BASE}/customer/${loginfo["u"]}/${loginfo["p"]}`);
+        console.log(response);
         const deets = await response.json();
         console.log(deets);
-        IDDisplay.innerHTML = `
-            <h2>Customer ID: ${deets[0]["account_id"]}</h2>
-        `;
-        PDisplay.innerHTML = `
-            <h2>Points: ${deets[0]["points"]}</h2>
-        `;
+        try {
+            IDDisplay.innerHTML = `
+                <h2>Customer ID: ${deets[0]["account_id"]}</h2>
+            `;
+            PDisplay.innerHTML = `
+                <h2>Points: ${deets[0]["points"]}</h2>
+            `;
+        } catch (error) {
+            IDDisplay.innerHTML = `
+                <h2>Login in to see your Customer ID!</h2>
+            `;
+            PDisplay.innerHTML = `
+                <h2>Earns points through purchases as a member!</h2>
+            `;
+        }
     } catch (error) {
         console.error('Error fetching data:', error);
     }

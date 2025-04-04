@@ -258,3 +258,43 @@ function faqAnswers() {
         console.log("Nothing.");
     }
 }
+
+//-----------------------------------------------------------------------------------------------
+
+// Backend base URL
+const BASE_URL = "http://localhost:3000";
+
+async function newAcc() {
+    const acc = retrieveData();
+    console.log(JSON.stringify(acc))
+
+    try {
+        const response = await fetch(`http://localhost:3000/add`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Accept-Charset': 'utf-8',
+                'Cache-Control': 'no-cache' },
+            body: JSON.stringify(acc),
+        });
+
+        if (response.ok) {
+            window.alert("Well done, you fuckface.");
+            document.getElementById("signupForm").reset(); // Reset the form
+        } else {
+            window.alert("Error registering account!");
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+function retrieveData() {
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    if (!name || !email || !password) return false;
+    console.log({ name, email, password });
+    return { name, email, password };
+}

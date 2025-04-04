@@ -21,5 +21,5 @@ CREATE TABLE `hardware`.`login` (
   `password` VARCHAR(255) NULL,
   `points` INT NULL,
   PRIMARY KEY (`id`));
-INSERT INTO login (id, name, email, password, points)
+INSERT INTO login (account_id, name, email, password, points)
 VALUES (999, "Bob", "sample@gmail.com", "112233", 15);

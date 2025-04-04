@@ -339,7 +339,7 @@ async function getID() {
         const deets = await response.json();
         console.log(deets);
         IDDisplay.innerHTML = `
-            <h2>Customer ID: ${deets[0]["id"]}</h2>
+            <h2>Customer ID: ${deets[0]["account_id"]}</h2>
         `;
         PDisplay.innerHTML = `
             <h2>Points: ${deets[0]["points"]}</h2>

@@ -71,15 +71,32 @@ app.post('/login', (req, res) => {
 	if (email && password) {
 		db.query('SELECT * FROM accounts WHERE email = ? AND password = ?', [email, password], (err, result) => {
 			if (err) return res.status(500).send(err);
-			if (result.email != "" || result.password != "") {
-				res.json(results);
+			if (result.length > 0) {
+				res.json(result);
 			} else {
-				res.send('Incorrect Username and/or Password!');
+				res.status(500).send(err);
 			}			
 		});
 	} else {
 		res.send('Please enter Username and Password!');
 	}
+});
+
+app.delete('/clear', (req, res) => {
+    const query = 'TRUNCATE login;';
+    db.query(query, (err) => {
+        if (err) return res.status(500).send(err);
+        res.send('Login ended successfully');
+    });
+});
+app.post('/newlog', async (req, res) => {
+    const {id, name, email, password, points} = req.body;
+    console.log(req.body);
+    const query = 'INSERT INTO login (id, name, email, password, points) VALUES (?, ?, ?, ?, ?)';
+    db.query(query, [id, name, email, password, points], (err) => {
+        if (err) return res.status(500).send(err);
+        res.send('Logged in successfully');
+    });
 });
 
 app.get('/customer', (req, res) => {

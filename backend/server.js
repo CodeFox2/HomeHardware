@@ -89,7 +89,7 @@ app.post('/newlog', async (req, res) => {
 });
 
 app.get('/customer', (req, res) => {
-    const query = 'SELECT id, points FROM login ORDER BY id DESC LIMIT 1;';
+    const query = 'SELECT account_id, points FROM login ORDER BY account_id DESC LIMIT 1;';
     db.query(query, (err, results) => {
         if (err) return res.status(500).send(err);
         res.json(results);

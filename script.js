@@ -337,12 +337,12 @@ async function getID() {
 
         const response = await fetch(`http://localhost:3000/customer`);
         const deets = await response.json();
-        console.log(info);
+        console.log(deets);
         IDDisplay.innerHTML = `
-            <h3>Customer ID: ${JSON.parse(deets)["id"]}</h3>
+            <h2>Customer ID: ${deets[0]["id"]}</h2>
         `;
         PDisplay.innerHTML = `
-            <h3>Points: ${JSON.parse(deets)["points"]}</h3>
+            <h2>Points: ${deets[0]["points"]}</h2>
         `;
     } catch (error) {
         console.error('Error fetching data:', error);

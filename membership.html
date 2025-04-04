@@ -3,78 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="styles.css">
-    <title>Membership - Hardeware Express</title>
+    <title>Home Hardware Delivery Service</title>
 </head>
 <body onload="getID()">
-  <h1>Hardware Express</h1>
-  <p>Your One Stop Shop For Everything Home Hardware!</p>
-  <div class="topnav">
-      <nav>
-      <a href="homepage.html">Home</a>
-      <a href="products.html">Products</a>
-      <a class="active" href="membership.html">Membership</a>
-      <a href="contact.html">Contact Us</a>
-      <a href="checkout.html">Checkout</a>  
-      <a href="signup.html">Sign Up</a>
-      </nav>
-  </div>
-  <div class="center">
-    <br>
-    <form>
-        <p id="custID"></p>
-    </form>
-    <br>
-    <form>
-        <p id="pointTotal"></p>
-    </form>
-    <br><br>
-    <form>
-        <h3><label for="newsletter">Newsletter:</label></h3>
-        <input type="checkbox" id="myCheck" value="Subscribed">
-        <button onclick="newsletter()">Submit</button>
-        <p id="text"></p>
-    </form>
-    <br><br>
-    <form>
-    <h3><label for="perks">Perks:</label></h3>
-    <select name="perks" id="perks" Perks>
-        <option value="">Choose One</option>
-        <option value="Free Shipping">Free Shipping</option>
-        <option value="Pre-Order">Pre-Order</option>
-        <option value="Gift Card">Gift Card</option>
-      </select>
-      <input type="submit" value="Convert"><br><br>
-    </form>
-    <br>
-  </div>
+    <h1>Home Hardware Delivery Service</h1>
+    <p>Your One Stop Shop For Everything Home Hardware!</p>
+    <div class="topnav">
+        <nav>
+            <a href="homepage.html">Home</a>
+            <a href="products.html">Products</a>
+            <a class="active" href="membership.html">Membership</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="checkout.html">Checkout</a>  
+            <a href="signup.html">Sign Up</a>
+        </nav>
+    </div>
+    <div class="center">
+        <br><form>
+            <p id="custID"></p>
+        </form><br>
+        <form>
+            <p id="pointTotal"></p>
+        </form><br>
+        <form>
+            <h2><label for="newsletter">Newsletter:</label></h2>
+            <input type="checkbox" id="myCheck" value="Subscribed">
+            <button type="button" onclick="newsletter()">Submit</button>
+            <p id="text"></p>
+            </form><br>
+        <form>
+            <h2><label for="perks">Perks:</label></h2>
+            <select name="perks" id="perks" Perks>
+            <option value="">Choose One</option>
+            <option value="Free Shipping">Free Shipping</option>
+            <option value="Pre-Order">Pre-Order</option>
+            <option value="Gift Card">Gift Card</option>
+            </select>
+            <input type="submit" value="Convert"><br><br>
+        </form><br>
+    </div>
 
-  <section class="product-grid">
+    <section class="product-grid">
     <!-- Products will be dynamically loaded here -->
-  </section>
-  <br><br>
+    </section>
+    <br><br>
 
-  <footer>
+    <script src="script.js"></script>
+
+    <footer>
     <p>&copy; 2025 Home Hardware. All rights reserved.</p>
-  </footer>
+    </footer>
 </body>
-
-  <script src="script.js"></script>
-
 </html>
-
-
-<script>
-  function newsletter(){
-    var checkBox = document.getElementById("myCheck");
-  var text = document.getElementById("text");
-let result = 'null';
-    if(checkBox.checked == true){
-      result = 'Subscribed';
-    }
-
-    else{
-      result = 'Not Subscribed';
-    }
-    document.getElementById('text').innerHTML = result;
-  }
-</script>

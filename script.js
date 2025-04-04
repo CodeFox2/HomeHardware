@@ -297,3 +297,54 @@ function retrieveData() {
     console.log({ name, email, password });
     return { name, email, password };
 }
+
+async function checkLogin() {
+    const u = document.getElementById("email").value;
+    const p = document.getElementById("password").value;
+    if (u !== "" || p != "") {
+        const input = {u, p};
+        console.log(input);
+        try {
+            const response = await fetch(`http://localhost:3000/login`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Accept-Charset': 'utf-8',
+                    'Cache-Control': 'no-cache' },
+                body: JSON.stringify(input),
+            });
+            if (response.ok) {
+                if (response) {
+                    window.alert("Welcome!");
+                    window.location.assign("membership.html");
+                }
+            } else {
+                window.alert("Error logging in!");
+            }
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    } else {
+        window.alert("Error logging in!");
+    }
+}
+
+async function getID() {
+    try {
+        const IDDisplay = document.getElementById("custID");
+        const PDisplay = document.getElementById("pointTotal");
+
+        const response = await fetch(`http://localhost:3000/customer`);
+        const deets = await response.json();
+        console.log(info);
+        IDDisplay.innerHTML = `
+            <h3>Customer ID: ${JSON.parse(deets)["id"]}</h3>
+        `;
+        PDisplay.innerHTML = `
+            <h3>Points: ${JSON.parse(deets)["points"]}</h3>
+        `;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}

@@ -78,20 +78,11 @@ app.get('/login/:email/:password', (req, res) => {
     });
 });
 
-app.post('/newlog', async (req, res) => {
-    const {account_id, name, email, password, points} = req.body;
-    console.log(req.body);
-    const query = 'INSERT INTO login (account_id, name, email, password, points) VALUES (?, ?, ?, ?, ?)';
-    db.query(query, [account_id, name, email, password, points], (err) => {
+app.get('/customer/:email/:password', (req, res) => {
+    const query = 'SELECT account_id, points FROM accounts WHERE email = ? AND password = ?';
+    db.query(query, [req.params.email, req.params.password], (err, results) => {
         if (err) return res.status(500).send(err);
-        res.send('Logged in successfully');
-    });
-});
-
-app.get('/customer', (req, res) => {
-    const query = 'SELECT account_id, points FROM login ORDER BY account_id DESC LIMIT 1;';
-    db.query(query, (err, results) => {
-        if (err) return res.status(500).send(err);
+        console.log(results);
         res.json(results);
     });
 });

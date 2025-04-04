@@ -15,7 +15,7 @@ INSERT INTO accounts (name, email, password, points)
 VALUES ('Shirley Perr', 'email@gmail.com', 'iLovePowerTools', 25);
 
 CREATE TABLE `hardware`.`login` (
-  `id` INT NOT NULL,
+  `account_id` INT NOT NULL,
   `name` VARCHAR(255) NULL,
   `email` VARCHAR(255) NULL,
   `password` VARCHAR(255) NULL,

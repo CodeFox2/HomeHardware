@@ -27,7 +27,7 @@ app.get("/", (req, res) => {
 });
 
 //Post Method: Insert Data
-app.post('/add', async (req, res) => {
+app.post('/new', async (req, res) => {
     const {name, email, password} = req.body;
     console.log(req.body);
     const query = 'INSERT INTO accounts (name, email, password) VALUES (?, ?, ?)';
@@ -46,19 +46,19 @@ app.get('/accounts', (req, res) => {
 });
 //Put Method: Update Data
 app.put('/update/:id', (req, res) => {
-    const { id } = req.params;
+    const { account_id } = req.params;
     const { name, email, password, points } = req.body;
     const query = 'UPDATE accounts SET name = ?, email = ?, password = ?, points = ? WHERE account_id = ?';
-    db.query(query, [name, email, password, points, id], (err) => {
+    db.query(query, [name, email, password, points, account_id], (err) => {
         if (err) return res.status(500).send(err);
         res.send('Item updated successfully');
     });
 });
 //Delete Method: Delete Data
 app.delete('/delete/:id', (req, res) => {
-    const { id } = req.params;
-    const query = 'DELETE FROM account WHERE id = ?';
-    db.query(query, [id], (err) => {
+    const { account_id } = req.params;
+    const query = 'DELETE FROM accounts WHERE account_id = ?';
+    db.query(query, [account_id], (err) => {
         if (err) return res.status(500).send(err);
         res.send('Item deleted successfully');
     });
@@ -66,41 +66,30 @@ app.delete('/delete/:id', (req, res) => {
 
 //---------------------------------------------------------------------------------------------
 
-app.post('/login', (req, res) => {
-	const {email, password} = req.params;
-	if (email && password) {
-		db.query('SELECT * FROM accounts WHERE email = ? AND password = ?', [email, password], (err, result) => {
-			if (err) return res.status(500).send(err);
-			if (result.length > 0) {
-				res.json(result);
-			} else {
-				res.status(500).send(err);
-			}			
-		});
-	} else {
-		res.send('Please enter Username and Password!');
-	}
-});
-
-app.delete('/clear', (req, res) => {
-    const query = 'TRUNCATE login;';
-    db.query(query, (err) => {
+app.get('/login/:email/:password', (req, res) => {
+    db.query('SELECT * FROM accounts WHERE email = ? AND password = ?', [req.params.email, req.params.password], (err, result) => {
         if (err) return res.status(500).send(err);
-        res.send('Login ended successfully');
+        if (result.length != 0) {
+            console.log(result)
+            res.json(result);
+        } else {
+            res.status(500).send(err);
+        }			
     });
 });
+
 app.post('/newlog', async (req, res) => {
-    const {id, name, email, password, points} = req.body;
+    const {account_id, name, email, password, points} = req.body;
     console.log(req.body);
-    const query = 'INSERT INTO login (id, name, email, password, points) VALUES (?, ?, ?, ?, ?)';
-    db.query(query, [id, name, email, password, points], (err) => {
+    const query = 'INSERT INTO login (account_id, name, email, password, points) VALUES (?, ?, ?, ?, ?)';
+    db.query(query, [account_id, name, email, password, points], (err) => {
         if (err) return res.status(500).send(err);
         res.send('Logged in successfully');
     });
 });
 
 app.get('/customer', (req, res) => {
-    const query = 'SELECT id, points FROM login';
+    const query = 'SELECT id, points FROM login ORDER BY id DESC LIMIT 1;';
     db.query(query, (err, results) => {
         if (err) return res.status(500).send(err);
         res.json(results);

@@ -22,4 +22,4 @@ CREATE TABLE `hardware`.`login` (
   `points` INT NULL,
   PRIMARY KEY (`id`));
 INSERT INTO login (id, name, email, password, points)
-VALUES (1, "Bob", "sample@gmail.com", "112233", 15);
+VALUES (999, "Bob", "sample@gmail.com", "112233", 15);

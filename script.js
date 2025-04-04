@@ -280,7 +280,6 @@ async function newAcc() {
         });
 
         if (response.ok) {
-            window.alert("Well done, you fuckface.");
             document.getElementById("signupForm").reset(); // Reset the form
         } else {
             window.alert("Error registering account!");

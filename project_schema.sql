@@ -7,17 +7,19 @@ CREATE TABLE `hardware`.`accounts` (
   `password` VARCHAR(255) NOT NULL,
   `points` INT NULL,
   PRIMARY KEY (`account_id`));
-
-CREATE TABLE `hardware`.`cart` (
-  `item_id` INT NOT NULL AUTO_INCREMENT,
-  `item_name` VARCHAR(255) NOT NULL,
-  `item_price` DECIMAL(20,2) NOT NULL,
-  `item_quantity` INT NOT NULL,
-  PRIMARY KEY (`item_id`));
-ALTER TABLE `hardware`.`cart` 
 ALTER TABLE accounts AUTO_INCREMENT=1001;
 
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'atthelastsecond';
 
 INSERT INTO accounts (name, email, password, points)
 VALUES ('Shirley Perr', 'email@gmail.com', 'iLovePowerTools', 25);
+
+CREATE TABLE `hardware`.`login` (
+  `id` INT NOT NULL,
+  `name` VARCHAR(255) NULL,
+  `email` VARCHAR(255) NULL,
+  `password` VARCHAR(255) NULL,
+  `points` INT NULL,
+  PRIMARY KEY (`id`));
+INSERT INTO login (id, name, email, password, points)
+VALUES (1, "Bob", "sample@gmail.com", "112233", 15);

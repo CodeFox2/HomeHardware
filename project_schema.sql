@@ -13,13 +13,3 @@ ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'atthelas
 
 INSERT INTO accounts (name, email, password, points)
 VALUES ('Shirley Perr', 'email@gmail.com', 'iLovePowerTools', 25);
-
-CREATE TABLE `hardware`.`login` (
-  `account_id` INT NOT NULL,
-  `name` VARCHAR(255) NULL,
-  `email` VARCHAR(255) NULL,
-  `password` VARCHAR(255) NULL,
-  `points` INT NULL,
-  PRIMARY KEY (`id`));
-INSERT INTO login (account_id, name, email, password, points)
-VALUES (999, "Bob", "sample@gmail.com", "112233", 15);

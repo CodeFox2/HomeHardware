@@ -1,4 +1,4 @@
-# HomeHardware
+# Hardware Express
 Web Technologies Group Project
 
 SETUP NOTES:

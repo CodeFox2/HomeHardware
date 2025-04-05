@@ -5,7 +5,7 @@ CREATE TABLE `hardware`.`accounts` (
   `name` VARCHAR(255) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
-  `points` INT NULL,
+  `points` INT NULL DEFAULT 0,
   PRIMARY KEY (`account_id`));
 ALTER TABLE accounts AUTO_INCREMENT=1001;
 

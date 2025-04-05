@@ -1,5 +1,18 @@
-// Connect to backend
-const BASE_URL = "http://localhost:3000";
+document.addEventListener('DOMContentLoaded', () => {
+    const nav = document.querySelector('.topnav nav');
+
+    if (localStorage.getItem('loggedIn') === 'true') {
+        const signUpLink = nav.querySelector('a[href="signup.html"]');
+        if (signUpLink) {
+            signUpLink.textContent = 'Sign Out';
+            signUpLink.href = '#';
+            signUpLink.addEventListener('click', () => {
+                localStorage.removeItem('loggedIn');
+                location.reload(); 
+            });
+        }
+    }
+});
 
 // Cart functionality
 let cart = [];
@@ -41,12 +54,6 @@ addToCartButtons.forEach(button => {
         
         // Check if item already in cart
         const existingItem = cart.find(item => item.id === id);
-        var quant;
-
-        const addIt = quant < 2 ? `${BASE_URL}/add` : `${BASE_URL}/update/${id}`;
-        const method = quant < 2 ? 'POST' : 'PUT';
-        console.log("!");
-
         if (existingItem) {
             existingItem.quantity += 1;
             quant = existingItem.quantity;
@@ -58,19 +65,6 @@ addToCartButtons.forEach(button => {
                 image,
                 quantity: 1
             });
-            quant = 1;
-        }
-        const toTable = {id, name, price, quant};
-        console.log(JSON.stringify(toTable));
-        const response = await fetch(addIt, {
-            method: 'POST',
-            headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-            body: JSON.stringify(toTable),
-        });
-        if (response.ok) {
-            console.log("Yes");
-        } else {
-            console.log("No");
         }
         updateCart();
         cartModal.style.display = 'block';
@@ -78,7 +72,7 @@ addToCartButtons.forEach(button => {
 });
 
 // Update cart UI
-function updateCart() {
+async function updateCart() {
     // Update cart count
     const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
     cartCount.textContent = totalItems;
@@ -123,13 +117,53 @@ function updateCart() {
     localStorage.setItem('hardwareCart', JSON.stringify(cart));
 }
 
+function updateSum() {
+    const savedCart = localStorage.getItem('hardwareCart');
+    cart = JSON.parse(savedCart);
+    if (cart.length === 0) {
+        document.getElementById("emptySumMessage").style.display = 'block';
+        document.getElementById("summaryItems").innerHTML = '<p id="emptyCartMessage">Your cart is empty</p>';
+    } else {
+        document.getElementById("emptySumMessage").style.display = 'none';
+        document.getElementById("summaryItems").innerHTML = '';
+        cart.forEach(item => {
+            const cartItemElement = document.createElement('div');
+            cartItemElement.className = 'summary-item';
+            cartItemElement.innerHTML = `
+                <span class="item-name">${item.name}</span>
+                <span class="item-price">$${(item.price * item.quantity).toFixed(2)} (${item.quantity} × $${item.price.toFixed(2)})</span>
+            `;
+            document.getElementById("summaryItems").appendChild(cartItemElement);
+        });
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const finalSum = (total + 29.99 + 15).toFixed(2);
+        document.getElementById("emptyTotals").innerHTML = `
+            <div class="summary-row">
+                <span>Subtotal:</span>
+                <span>$${total}</span>
+            </div>
+            <div class="summary-row">
+                <span>Delivery Fee:</span>
+                <span>$29.99</span>
+            </div>
+            <div class="summary-row">
+                <span>ASAP Delivery:</span>
+                <span>$15.00</span>
+            </div>
+            <div class="summary-row total">
+                <span>Total:</span>
+                <span>$${finalSum}</span>
+            </div>
+        `;
+    }
+}
+
 // Proceed to Checkout
 proceedToCheckout.addEventListener('click', () => {
     if (cart.length === 0) {
         alert('Your cart is empty. Please add some items before checkout.');
         return;
     }
-    
     // Save cart to localStorage before redirecting
     localStorage.setItem('hardwareCart', JSON.stringify(cart));
     
@@ -226,32 +260,32 @@ loadCart();
 
 function faqAnswers() {
     let question = document.getElementById("frequentyasked").value;
-    if (question == q1) {
-        document.getElementById("result").innerHTML = `
+    if (question == "q1") {
+        document.getElementById("q").innerHTML = `
             <p>Here at Hardware Express, we sell a wide variety of home hardware tools,
             from DIY materials like wood, paint, nails and such, to tools like power drills
             and screwdrivers, to more practical things like safety gear.</p>
         `;
-    } else if (question == q2) {
-        document.getElementById("result").innerHTML = `
+    } else if (question == "q2") {
+        document.getElementById("q").innerHTML = `
             <p>We regularly restock every Sunday.</p>
         `;
-    } else if (question == q3) {
-        document.getElementById("result").innerHTML = `
+    } else if (question == "q3") {
+        document.getElementById("q").innerHTML = `
             <p>Our website is always open, but deliveries may be delayed to the following
             day depending on the time of day or other outside factors.</p>
         `;
-    } else if (question == q4) {
-        document.getElementById("result").innerHTML = `
+    } else if (question == "q4") {
+        document.getElementById("q").innerHTML = `
             <p>No. But you can call us to get a refund provided it's been a week since your
             delivery and the warranty/warranties of your purchase(s) haven't been voided.</p>
         `;
-    } else if (question == q5) {
-        document.getElementById("result").innerHTML = `
+    } else if (question == "q5") {
+        document.getElementById("q").innerHTML = `
             <p>Only to customers who've earned a certain number of points from purchases.</p>
         `;
-    } else if (question == q6) {
-        document.getElementById("result").innerHTML = `
+    } else if (question == "q6") {
+        document.getElementById("q").innerHTML = `
             <p>Not really, no. Sorry.</p>
         `;
     } else {
@@ -270,36 +304,38 @@ function newsletter() {
     }
         text.innerHTML = result;
 }
+
 //-----------------------------------------------------------------------------------------------
 
 // Backend Stuff
 
 async function newAcc() {
     const acc = retrieveData();
-    console.log(JSON.stringify(acc))
-
-    try {
-        const response = await fetch(`http://localhost:3000/new`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Accept-Charset': 'utf-8',
-                'Cache-Control': 'no-cache' },
-            body: JSON.stringify(acc),
-        });
-
-        if (!response.ok) {
-            window.alert("Error registering account!");
+    var formR = document.getElementById("signupForm");
+    formR.addEventListener("submit", redirectR = function(e) {
+        e.preventDefault();
+        window.alert("Account made.\nWelcome!");
+        window.location.href = "login.html";
+    }, true);
+    if (acc.name && acc.email && acc.password.length >= 6){
+        try {
+            const response = await fetch(`http://localhost:3000/new`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Accept-Charset': 'utf-8',
+                    'Cache-Control': 'no-cache' },
+                body: JSON.stringify(acc),
+            });
+            if (!response.ok) {
+                window.alert("Error registering account!");
+            }
+        } catch (error) {
+            console.error('Error:', error);
         }
-        var form = document.getElementById("signupForm");
-        form.addEventListener("submit", redirectR = function(e) {
-            e.preventDefault();
-            window.alert("Account made.\nWelcome!");
-            window.location.assign("login.html");
-        });
-    } catch (error) {
-        console.error('Error:', error);
+    } else {
+        window.alert("Invalid credentials!");
     }
 }
 function retrieveData() {
@@ -307,38 +343,35 @@ function retrieveData() {
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value.trim();
 
-    if (!name || !email || !password) return false;
-    console.log({ name, email, password });
     return { name, email, password };
 }
 
 async function checkLogin() {
     const u = document.getElementById("email").value;
     const p = document.getElementById("password").value;
-    if (u != "" || p != "") {
+    if (u && p.length >= 6) {
         try {
             const BASE = `http://localhost:3000`;
             const response = await fetch(`${BASE}/login/${u}/${p}`);
-            console.log(response);
-            const match = await response.json();
             if (!response.ok) {
                 window.alert("Incorrect username and/or password!");
             } else {
                 const input = {u, p};
                 console.log(input);
                 localStorage.setItem("accLogin", JSON.stringify(input));
-            }
-            var form = document.getElementById("loginForm");
-                form.addEventListener("submit", redirectL = function(e) {
+                var formL = document.getElementById("loginForm");
+                formL.addEventListener("submit", redirectL = function(e) {
                     e.preventDefault();
-                });
-            window.alert("Logged in.\nWelcome!");
-            window.location.assign("membership.html");
+                }, true);
+                window.alert("Logged in.\nWelcome!");
+                localStorage.setItem('loggedIn', 'true');
+                window.location.assign("membership.html");
+            }
         } catch (error) {
             window.alert("Incorrect username and/or password!");
         }
     } else {
-        window.alert("Error logging in!");
+        window.alert("Invalid username and/or password!");
     }
 }
 
@@ -351,18 +384,16 @@ async function getID() {
         console.log(loginfo);
 
         const BASE = `http://localhost:3000`;
-        const response = await fetch(`${BASE}/customer/${loginfo["u"]}/${loginfo["p"]}`);
-        console.log(response);
-        const deets = await response.json();
-        console.log(deets);
-        try {
+        if (localStorage.getItem('accLogin') === 'true' && localStorage.getItem('loggedIn') === 'true') {
+            const response = await fetch(`${BASE}/customer/${loginfo["u"]}/${loginfo["p"]}`);
+            const deets = await response.json();
             IDDisplay.innerHTML = `
                 <h2>Customer ID: ${deets[0]["account_id"]}</h2>
             `;
             PDisplay.innerHTML = `
                 <h2>Points: ${deets[0]["points"]}</h2>
             `;
-        } catch (error) {
+        } else {
             IDDisplay.innerHTML = `
                 <h2>Login in to see your Customer ID!</h2>
             `;

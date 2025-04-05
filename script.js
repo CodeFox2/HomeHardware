@@ -384,7 +384,7 @@ async function getID() {
         console.log(loginfo);
 
         const BASE = `http://localhost:3000`;
-        if (localStorage.getItem('accLogin') === 'true' && localStorage.getItem('loggedIn') === 'true') {
+        if (localStorage.getItem('accLogin') != "" && localStorage.getItem('loggedIn') === 'true') {
             const response = await fetch(`${BASE}/customer/${loginfo["u"]}/${loginfo["p"]}`);
             const deets = await response.json();
             IDDisplay.innerHTML = `

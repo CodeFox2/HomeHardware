@@ -1,4 +1,5 @@
 CREATE SCHEMA `hardware` ;
+USE `hardware`;
 
 CREATE TABLE `hardware`.`accounts` (
   `account_id` INT NOT NULL AUTO_INCREMENT,

@@ -7,12 +7,10 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>Hardware Express</h1>
-            <p>Your tools and materials delivered in 2 hours or less!</p>
-        </div>
-    </header>
+    <div class="container">
+        <h1>Hardware Express</h1>
+        <p>Your tools and materials delivered in 2 hours or less!</p>
+    </div>
 
     <div class="topnav">
         <nav>
@@ -21,7 +19,7 @@
             <a href="membership.html">Membership</a>
             <a href="contact.html">Contact Us</a>
             <a class="active" href="checkout.html">Checkout</a>
-            <a href="signup.html">Sign Up</a>
+            <a id="auth-link" href="signup.html">Sign Up</a>
         </nav>
     </div>
     
@@ -111,34 +109,12 @@
                 <div class="order-summary">
                     <h3>Your Order</h3>
                     <div class="summary-items" id="summaryItems">
-                        <!-- Cart items will be loaded here via JavaScript -->
-                        <div class="summary-item">
-                            <span class="item-name">Cordless Power Drill Set</span>
-                            <span class="item-price">$89.99</span>
-                        </div>
-                        <div class="summary-item">
-                            <span class="item-name">Pressure-Treated Lumber (8ft)</span>
-                            <span class="item-price">$13.98 (2 × $6.99)</span>
-                        </div>
+                        <p id="emptySumMessage">Your cart is empty.</p>
                     </div>
                     
-                    <div class="summary-totals">
-                        <div class="summary-row">
-                            <span>Subtotal:</span>
-                            <span>$103.97</span>
-                        </div>
-                        <div class="summary-row">
-                            <span>Delivery Fee:</span>
-                            <span>$29.99</span>
-                        </div>
-                        <div class="summary-row">
-                            <span>ASAP Delivery:</span>
-                            <span>$15.00</span>
-                        </div>
-                        <div class="summary-row total">
-                            <span>Total:</span>
-                            <span>$148.96</span>
-                        </div>
+                    <div class="summary-totals" id="summaryTotals">
+                        <p id="emptyTotals"></p>
+                        
                     </div>
                     
                     <div class="delivery-info">
@@ -156,10 +132,12 @@
             </div>
         </div>
     </div>
+
     <footer>
-        <p>&copy; 2025 All rights reserved.</p>
+        <p>&copy; 2025 Hardware Express. All Rights Reserved.</p>
     </footer>
 
-    <script src="checkout.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
+
